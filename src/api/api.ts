@@ -1,6 +1,6 @@
 // import { Course } from "../types/course";
 
-const BASE_URL = 'http://api.wisey.app/api/v1';
+const BASE_URL = 'https://api.wisey.app/api/v1';
 
 function getToken() {
   return fetch(BASE_URL + '/auth/anonymous?platform=subscriptions')
