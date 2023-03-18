@@ -1,0 +1,23 @@
+.courses {
+  background: #eff3f4;
+
+  &__subtitle {
+    font-size: 16px;
+    font-weight: 600;
+  }
+
+  &__description {
+    margin: 12px 0 24px;
+  }
+
+  &__skill {
+    margin-left: 32px;
+    padding-left: 10px;
+    list-style-type: circle;
+  }
+
+  &__add {
+    display: flex;
+    align-items: center;
+  }
+}

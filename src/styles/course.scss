@@ -1,0 +1,22 @@
+.course {
+  &__title {
+    text-align: center;
+  }
+
+  &__lesson {
+    margin: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #E6EAEE;
+    cursor: pointer;
+
+    &:last-child {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+  }
+
+  &__bottom {
+    display: flex;
+    justify-content: space-between;
+  }
+}
