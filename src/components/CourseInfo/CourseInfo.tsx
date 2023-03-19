@@ -1,39 +1,36 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import ReactHlsPlayer from 'react-hls-player';
-import { Course } from "../../types/course";
+import { Course } from '../../types/course';
 
 import { Rating } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 
 type Props = {
   course: Course;
-  selectCourse: (id:string) => void;
+  selectCourse: (id: string) => void;
 };
 
-export const CourseInfo: React.FC<Props> = ({
-  course,
-  selectCourse,
-}) => {
-  const playerRef = React.useRef<HTMLVideoElement>(null);
+export const CourseInfo: React.FC<Props> = ({ course, selectCourse }) => {
+  const playerRef = useRef<HTMLVideoElement>(null);
 
   const playVideo = () => {
     if (playerRef.current) {
       playerRef.current.play();
     }
-  }
+  };
 
   const pauseVideo = () => {
     if (playerRef.current) {
       playerRef.current.pause();
     }
-  }
+  };
 
   const { id, title, description, previewImageLink, lessonsCount, rating, meta } = course;
 
   return (
     <li className="courses box">
       <div className="courses__header columns featured">
-        <div className="column is-7 post-img ">
+        <div className="courses__img-container column is-7 post-img ">
           <img src={`${previewImageLink}/cover.webp`} alt={`Course ${title}`} />
         </div>
         <div className="column is-5 featured-content va">
@@ -53,7 +50,7 @@ export const CourseInfo: React.FC<Props> = ({
             <p className="courses__description">{description}</p>
 
             <button
-              type='button'
+              type="button"
               className="courses__button button is-primary"
               onClick={() => selectCourse(id)}
             >
@@ -67,31 +64,27 @@ export const CourseInfo: React.FC<Props> = ({
         {meta.skills && (
           <ul className="courses__skills column is-5">
             <span className="courses__subtitle heading">Skills</span>
-            
-          {meta.skills.map(skill => (
-            <li className='courses__skill' key={skill}>
-              {skill}
-            </li>
-          ))}
-        </ul>
+
+            {meta.skills.map((skill) => (
+              <li className="courses__skill" key={skill}>
+                {skill}
+              </li>
+            ))}
+          </ul>
         )}
 
-        {!!meta.courseVideoPreview.duration && (
-          <div
-            className='player-wrapper column'
-            onMouseEnter={playVideo}
-            onMouseLeave={pauseVideo}
-          >
+        {meta.courseVideoPreview && !!meta.courseVideoPreview.duration && (
+          <div className="player-wrapper column" onMouseEnter={playVideo} onMouseLeave={pauseVideo}>
             <ReactHlsPlayer
-              className='react-player'
+              className="react-player"
               src={`${meta.courseVideoPreview.link}`}
               playerRef={playerRef}
               controls
               muted
               loop
               autoPlay={false}
-              poster={`${meta.courseVideoPreview.previewImageLink}.webp`}
-              // poster={`${previewImageLink}/cover.webp`}
+              // poster={`${meta.courseVideoPreview.previewImageLink}.webp`}
+              poster="https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
             />
           </div>
         )}

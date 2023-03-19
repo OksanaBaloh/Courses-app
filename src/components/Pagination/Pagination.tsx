@@ -5,14 +5,10 @@ import { getNumbers } from '../../utils';
 type Props = {
   total: number;
   currentPage: number;
-  onPageChange:(page: number) => void;
+  onPageChange: (page: number) => void;
 };
 
-export const Pagination: React.FC<Props> = ({
-  total,
-  currentPage,
-  onPageChange,
-}) => {
+export const Pagination: React.FC<Props> = ({ total, currentPage, onPageChange }) => {
   const pageAmount = Math.ceil(total / 10);
   const pages = getNumbers(1, pageAmount);
 
@@ -21,7 +17,7 @@ export const Pagination: React.FC<Props> = ({
 
   return (
     <ul className="pagination">
-      <li className='pagination__item'>
+      <li className="pagination__item">
         <button
           type="button"
           className="button is-light pagination__link"
@@ -36,16 +32,13 @@ export const Pagination: React.FC<Props> = ({
         </button>
       </li>
 
-      {pages.map(page => (
-        <li
-          className='pagination__item'
-          key={page}
-        >
+      {pages.map((page) => (
+        <li className="pagination__item" key={page}>
           <button
             type="button"
             className={classNames('pagination__link', 'button', 'is-link', {
               'is-medium': page === currentPage,
-              'is-active': page === currentPage,
+              'is-active': page === currentPage
             })}
             onClick={() => onPageChange(page)}
           >
@@ -54,7 +47,7 @@ export const Pagination: React.FC<Props> = ({
         </li>
       ))}
 
-      <li className='pagination__item'>
+      <li className="pagination__item">
         <button
           type="button"
           className="button is-light pagination__link"

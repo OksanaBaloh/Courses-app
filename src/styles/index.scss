@@ -1,9 +1,6 @@
-:root {
-  background: #fff;
-}
+@import "~bulma/sass/utilities/all";
 
 body {
-
   background: #fff;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
 }
@@ -17,21 +14,13 @@ ul {
   transition-property: opacity, min-height;
   transition-duration: 1s;
   min-height: 36px;
+  text-align: center;
 }
 
 .notification.hidden {
   min-height: 0;
   opacity: 0;
   pointer-events: none;
-}
-
-
-.player-wrapper {
-  height: fit-content;
-}
-
-.react-player {
-  width: 100%;
 }
 
 @import "./app.scss";

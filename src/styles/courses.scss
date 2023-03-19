@@ -1,6 +1,11 @@
 .courses {
   background: #eff3f4;
 
+  &__img-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
   &__subtitle {
     font-size: 16px;
     font-weight: 600;
@@ -17,7 +22,9 @@
   }
 
   &__add {
-    display: flex;
-    align-items: center;
+    @include from(640px) {
+      display: flex;
+      align-items: center;
+    }
   }
 }

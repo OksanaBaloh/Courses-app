@@ -1,7 +1,6 @@
 .app {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 0 20px;
 
   &__header {
     position: fixed;
@@ -10,29 +9,34 @@
     top: 0;
     width: 100%;
     z-index: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     padding: 10px 20px;
+
+    text-align: center;
     background: linear-gradient(to top right, #524ad0 10%, #d099fa);
+
+    @include from(640px) {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
   }
 
   &__title {
-    margin-bottom: 0;
+    margin-bottom: 16px;
     font-size: 2.5rem;
     font-weight: 600;
     line-height: 1.125;
     color: #fff;
-  }
 
-  &__title-wrapper {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 40px;
+    @include from(640px) {
+      margin-bottom: 0;
+    }
   }
 
   &__content {
-    padding: 80px 0 30px;
+    padding: 120px 0 30px;
+    @include from(640px) {
+      padding: 64px 0 30px;
+    }
   }
 }

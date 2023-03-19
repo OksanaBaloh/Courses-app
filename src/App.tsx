@@ -28,56 +28,79 @@ export const App: React.FC = () => {
   };
 
   useEffect(() => {
-    getCourses().then(setCourses);
+    const getCoursesFromServer = async () => {
+      try {
+        setErrorMessage(ErrorType.None);
+        const coursesFromServer = await getCourses();
+
+        setCourses(coursesFromServer);
+      } catch (error) {
+        setErrorMessage(ErrorType.Load);
+      }
+    };
+
+    getCoursesFromServer();
   }, []);
 
   useEffect(() => {
-    getCourse(selectedId).then(setCourse);
+    const getCourseFromServer = async () => {
+      try {
+        setErrorMessage(ErrorType.None);
+        const courseFromServer = await getCourse(selectedId);
+
+        setCourse(courseFromServer);
+      } catch (error) {
+        setErrorMessage(ErrorType.LoadOneCourse);
+      }
+    };
+
+    if (selectedId) {
+      getCourseFromServer();
+    }
   }, [selectedId]);
 
   const handleSetError = (error: ErrorType) => {
-    setErrorMessage(error)
-  }
+    setErrorMessage(error);
+  };
 
   return (
     <div className="app">
       <header className="app__header">
-        <div className="app__title-wrapper">
-          <h1 className="app__title">My Courses</h1>
-        </div>
+        <h1 className="app__title">My Courses</h1>
 
-        {selectedId 
-          ? <button
-              type="button"
-              className="button is-link is-medium"
-              onClick={() => setSelectedId('')}
-            >
-              All Courses
-            </button>
-          : <Pagination
-              total={total}
-              currentPage={currentPage}
-              onPageChange={handlePageChange}
-            />
-        }
+        {selectedId ? (
+          <button
+            type="button"
+            className="button is-link is-medium"
+            onClick={() => setSelectedId('')}
+          >
+            All Courses
+          </button>
+        ) : (
+          <Pagination total={total} currentPage={currentPage} onPageChange={handlePageChange} />
+        )}
       </header>
 
       <main className="app__content">
         {!courses.length ? (
-          <Loader />
-        ) : (selectedId 
-          ? (course?.lessons ? <CourseItem course={course} setError={handleSetError}/> : <Loader />)
-          : <CourseList courses={visibleCourses} selectCourse={(id:string) => setSelectedId(id)}/>
+          <Loader hasLoader={!!errorMessage} />
+        ) : selectedId ? (
+          course?.lessons ? (
+            <CourseItem course={course} setError={handleSetError} />
+          ) : (
+            <Loader hasLoader={!!errorMessage} />
+          )
+        ) : (
+          <CourseList courses={visibleCourses} selectCourse={(id: string) => setSelectedId(id)} />
         )}
 
-      {!!errorMessage && (
-        <ErrorNotification
-          errorMessage={errorMessage}
-          onCloseError={() => setErrorMessage(ErrorType.None)}
-        />
-      )}
+        {!!errorMessage && (
+          <ErrorNotification
+            errorMessage={errorMessage}
+            onCloseError={() => setErrorMessage(ErrorType.None)}
+          />
+        )}
       </main>
-
     </div>
   );
-}
+};

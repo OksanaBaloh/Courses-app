@@ -8,16 +8,13 @@ export function getNumbers(from: number, to: number): number[] {
   return numbers;
 }
 
-const canPIP = () => ('pictureInPictureEnabled' in document
-  && document.pictureInPictureEnabled);
+const canPIP = () => 'pictureInPictureEnabled' in document && document.pictureInPictureEnabled;
 
 const supportsModernPIP = () => {
   const video = document.createElement('video');
 
   return (
-    canPIP()
-    && video.requestPictureInPicture
-    && typeof video.requestPictureInPicture === 'function'
+    canPIP() && video.requestPictureInPicture && typeof video.requestPictureInPicture === 'function'
   );
 };
 
@@ -46,4 +43,3 @@ export const closePIP = async (video: any) => {
     await video.webkitSetPresentationMode('inline');
   }
 };
-
