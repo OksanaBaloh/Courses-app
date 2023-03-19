@@ -1,7 +1,9 @@
 # Courses-app
 
 "My Courses" is a web app for studying.
-Here is [DEMO LINK](https://OksanaBaloh.github.io/Courses-app/)
+
+Here is [DEMO LINK](https://OksanaBaloh.github.io/Courses-app/).
+
 Instruction below explains how to launch app local.
 
 ## Setup
