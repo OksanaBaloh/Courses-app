@@ -85,6 +85,7 @@ export const CourseInfo: React.FC<Props> = ({ course, selectCourse }) => {
               autoPlay={false}
               // poster={`${meta.courseVideoPreview.previewImageLink}.webp`}
               poster="https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+              width="100%"
             />
           </div>
         )}
